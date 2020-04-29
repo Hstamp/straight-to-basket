@@ -7,8 +7,6 @@ describe('Menu', () => {
     const { getByTestId } = render(<Menu />);
     expect(getByTestId('fullMenu'));
     expect(getByTestId('fullMenuImage'));
-    expect(getByTestId('fullMenuTitle'));
-    expect(getByTestId('fullMenuContent'));
   });
 
   xit('renders a list of menu items', () => {
