@@ -10,6 +10,10 @@ const styles = makeStyles(({ palette, spacing, breakpoints }) => ({
     padding: `${spacing(3)}px 0px`,
     flexGrow: 1,
     opacity: 0.8,
+    borderBottom: `1px solid ${palette.common.accent}`,
+    '& div > p:first-child': {
+      fontWeight: 'bold',
+    },
   },
   itemDescription: {
     paddingTop: spacing(),

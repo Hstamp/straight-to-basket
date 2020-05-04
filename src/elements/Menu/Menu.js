@@ -16,11 +16,8 @@ const styles = makeStyles(({ palette, spacing }) => ({
     backgroundColor: palette.primary.dark,
   },
   menuAllItems: {
-    margin: spacing(3),
-    padding: `${spacing(3)}px ${spacing(2)}px`,
-    border: `2px solid ${palette.secondary.dark}`,
+    padding: `${spacing(4)}px ${spacing()}px`,
   },
-
 }));
 
 const Menu = () => {

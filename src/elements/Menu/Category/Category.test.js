@@ -14,7 +14,7 @@ describe('Category', () => {
       />,
     );
     expect(getByTestId(`categoryBlock-${menuData[1].category}`));
-    expect(getByTestId('categoryTitle')).toHaveTextContent('main');
+    expect(getByTestId('categoryTitle')).toHaveTextContent('Main');
     menuItems.forEach((menuItem) => expect(getByTestId(`item-${menuItem.name.replace(/\s/g, '')}`)));
   });
 });

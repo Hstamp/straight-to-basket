@@ -12,9 +12,9 @@ const styles = makeStyles(({ palette, spacing, breakpoints }) => ({
     flexDirection: 'column',
   },
   title: {
-    borderBottom: `1px solid ${palette.common.accent}`,
-    paddingBottom: spacing(),
-    marginBottom: spacing(2),
+    borderBottom: `4px solid ${palette.secondary.dark}`,
+    paddingTop: spacing(2),
+    backgroundColor: `${palette.secondary.light}`,
   },
 }));
 
