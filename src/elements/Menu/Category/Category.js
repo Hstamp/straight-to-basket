@@ -6,7 +6,7 @@ import { string, object } from 'prop-types';
 import MenuItem from './MenuItem';
 
 
-const styles = makeStyles(({ palette, spacing, breakpoints }) => ({
+const styles = makeStyles(({ palette, spacing }) => ({
   root: {
     padding: spacing(2),
     flexDirection: 'column',
@@ -14,12 +14,12 @@ const styles = makeStyles(({ palette, spacing, breakpoints }) => ({
   title: {
     borderBottom: `4px solid ${palette.secondary.dark}`,
     paddingTop: spacing(2),
-    backgroundColor: `${palette.secondary.light}`,
+    backgroundColor: palette.secondary.light,
   },
 }));
 
 // Destructure menuItems prop to extract category and menuItems array
-const Category = ({ menuItems: { category, menuItems }, dataTestId }) => {
+const Category = ({ menuItems: { category, menuItems }, dataTestId, ...props }) => {
   const { root, title } = styles();
   return (
     <Grid container data-testid={`categoryBlock-${dataTestId}`} className={root}>
@@ -31,6 +31,7 @@ const Category = ({ menuItems: { category, menuItems }, dataTestId }) => {
           key={menuItem.id}
           item={menuItem}
           dataTestId={menuItem.name}
+          {...props}
         />
       ))}
     </Grid>

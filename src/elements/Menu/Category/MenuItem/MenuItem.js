@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  makeStyles, Grid, Typography, Box,
+  makeStyles, Grid, Typography,
 } from '@material-ui/core';
-import { string, object } from 'prop-types';
+import { string, object, func } from 'prop-types';
 
 
-const styles = makeStyles(({ palette, spacing, breakpoints }) => ({
+const styles = makeStyles(({ palette, spacing }) => ({
   root: {
     padding: `${spacing(3)}px 0px`,
     flexGrow: 1,
@@ -22,10 +22,10 @@ const styles = makeStyles(({ palette, spacing, breakpoints }) => ({
 }));
 
 // Destructure menuItems prop to extract category and menuItems array
-const MenuItem = ({ item: { name, price }, dataTestId }) => {
+const MenuItem = ({ item: { name, price }, dataTestId, handleClick }) => {
   const { root, itemDescription } = styles();
   return (
-    <Grid container justify="space-between" data-testid={`item-${dataTestId.replace(/\s/g, '')}`} className={root}>
+    <Grid container justify="space-between" data-testid={`item-${dataTestId.replace(/\s/g, '')}`} className={root} onClick={() => handleClick(name)}>
       <Grid item xs={10}>
         <Typography>
           {' '}
@@ -52,6 +52,7 @@ const MenuItem = ({ item: { name, price }, dataTestId }) => {
 MenuItem.propTypes = {
   dataTestId: string.isRequired,
   item: object.isRequired,
+  handleClick: func.isRequired,
 };
 
 export default MenuItem;

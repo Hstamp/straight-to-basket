@@ -19,7 +19,7 @@ const menuData = [
       },
       {
         id: 3,
-        name: 'Olives',
+        name: 'Olives 3',
         price: '3.99',
         inStock: true,
         qtyInStock: 10,
@@ -59,21 +59,21 @@ const menuData = [
     menuItems: [
       {
         id: 1,
-        name: 'Caesar Salad',
+        name: 'Caesar Salad 1',
         price: '12.50',
         inStock: true,
         qtyInStock: 1,
       },
       {
         id: 2,
-        name: 'Caesar Salad',
+        name: 'Caesar Salad 2',
         price: '12.50',
         inStock: true,
         qtyInStock: 100,
       },
       {
         id: 3,
-        name: 'Caesar Salad',
+        name: 'Caesar Salad 3',
         price: '12.50',
         inStock: true,
         qtyInStock: 20,
@@ -93,14 +93,14 @@ const menuData = [
       },
       {
         id: 2,
-        name: 'Chips',
+        name: 'Scampi',
         price: '3.50',
         inStock: true,
         qtyInStock: 100,
       },
       {
         id: 3,
-        name: 'Chips',
+        name: 'Salad',
         price: '3.50',
         inStock: true,
         qtyInStock: 200,
@@ -120,14 +120,14 @@ const menuData = [
       },
       {
         id: 2,
-        name: 'Sticky Toffee Pudding',
+        name: 'Chocolate Mouse',
         price: '6.99',
         inStock: true,
         qtyInStock: 100,
       },
       {
         id: 3,
-        name: 'Sticky Toffee Pudding',
+        name: 'Banana Bread',
         price: '6.99',
         inStock: true,
         qtyInStock: 200,
