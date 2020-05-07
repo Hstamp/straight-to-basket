@@ -21,16 +21,17 @@ describe('Menu', () => {
   describe('Order Panel', () => {
     it('Opens the order panel on click of a Menu Item', () => {
       const { getByTestId } = render(<Menu />);
-      expect(getByTestId('orderPanel')).toHaveClass('makeStyles-orderPanel-296');
-      expect(getByTestId('orderPanel')).not.toHaveClass('makeStyles-showOrderPanel-297');
+      expect(getByTestId('orderPanel')).toHaveClass('makeStyles-orderPanel-298');
+      expect(getByTestId('orderPanel')).not.toHaveClass('makeStyles-showOrderPanel-299');
       fireEvent.click(getByTestId(`item-${getItemName(menuData[0].menuItems[1].name)}`));
-      expect(getByTestId('orderPanel')).toHaveClass('makeStyles-showOrderPanel-297');
+      expect(getByTestId('orderPanel')).toHaveClass('makeStyles-showOrderPanel-299');
       fireEvent.click(getByTestId('orderPanel'));
-      expect(getByTestId('orderPanel')).not.toHaveClass('makeStyles-showOrderPanel-297');
+      expect(getByTestId('orderPanel')).not.toHaveClass('makeStyles-showOrderPanel-299');
     });
 
     it('has the base elements', () => {
       const { getByTestId } = render(<Menu />);
+      fireEvent.click(getByTestId(`item-${getItemName(menuData[0].menuItems[1].name)}`));
       expect(getByTestId('orderPanelTitle'));
       expect(getByTestId('orderPanelDesc'));
       expect(getByTestId('orderPanelOrderQty'));

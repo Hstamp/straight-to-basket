@@ -3,6 +3,7 @@ import {
   makeStyles, Grid, Typography,
 } from '@material-ui/core';
 import { string, object, func } from 'prop-types';
+import { shortDescriptor } from '../../../../data';
 
 
 const styles = makeStyles(({ palette, spacing }) => ({
@@ -34,7 +35,7 @@ const MenuItem = ({ item: { name, price }, dataTestId, handleClick }) => {
         </Typography>
         <Typography className={itemDescription}>
           {' '}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tristique.
+          {shortDescriptor.description}
           {' '}
         </Typography>
       </Grid>

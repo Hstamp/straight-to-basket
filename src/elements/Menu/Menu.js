@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   makeStyles, Grid, Box, Typography,
 } from '@material-ui/core';
-import menuData from '../../data/menuData';
+import { longDescriptor, menuData } from '../../data';
 import Category from './Category';
 
 const styles = makeStyles(({ palette, spacing }) => ({
@@ -84,9 +84,7 @@ const Menu = () => {
           <Grid container justify="center" className={orderPanelContent}>
             <Typography variant="h2" data-testid="orderPanelTitle"> Menu Title </Typography>
             <Typography variant="body2" data-testid="orderPanelDesc">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel maximus ante.
-              Donec dignissim nulla nibh.Duis vitae metus elit.
-              Etiam vel diam feugiat, elementum neque sed, condimentum urna. Phasellus.
+              {longDescriptor.description}
             </Typography>
           </Grid>
         )}
