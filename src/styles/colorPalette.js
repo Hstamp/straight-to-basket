@@ -8,4 +8,5 @@ export default {
   surface: '#ffffff',
   contrastWhite: '#f5f5f5f5',
   error: '#b10d5d',
+  grey: '#434343',
 };

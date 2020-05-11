@@ -28,13 +28,5 @@ describe('Menu', () => {
       fireEvent.click(getByTestId('orderPanel'));
       expect(getByTestId('orderPanel')).not.toHaveClass('makeStyles-showOrderPanel-299');
     });
-
-    it('has the base elements', () => {
-      const { getByTestId } = render(<Menu />);
-      fireEvent.click(getByTestId(`item-${getItemName(menuData[0].menuItems[1].name)}`));
-      expect(getByTestId('orderPanelTitle'));
-      expect(getByTestId('orderPanelDesc'));
-      expect(getByTestId('orderPanelOrderQty'));
-    });
   });
 });

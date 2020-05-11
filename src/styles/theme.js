@@ -8,6 +8,7 @@ const theme = createMuiTheme({
       white: '#ffffff',
       offWhite: '#f5f5f5f5',
       accent: colorPalette.accent,
+      grey: colorPalette.grey,
     },
     primary: {
       main: colorPalette.primary,

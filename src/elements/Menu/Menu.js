@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import {
   makeStyles, Grid, Box, Typography,
 } from '@material-ui/core';
-import { longDescriptor, menuData } from '../../data';
+import { menuData } from '../../data';
 import Category from './Category';
+import OrderPanel from './OrderPanel';
 
 const styles = makeStyles(({ palette, spacing }) => ({
   root: {
@@ -35,14 +36,11 @@ const styles = makeStyles(({ palette, spacing }) => ({
   showOrderPanel: {
     width: '100%',
   },
-  orderPanelContent: {
-    padding: spacing(6),
-  },
 }));
 
 const Menu = () => {
   const {
-    root, menuImage, menuAllItems, orderPanel, showOrderPanel, orderPanelContent,
+    root, menuImage, menuAllItems, orderPanel, showOrderPanel,
   } = styles();
   const [openPanel, setOpenPanel] = useState(false);
 
@@ -80,14 +78,7 @@ const Menu = () => {
         onClick={closeOrderPanel}
         data-testid="orderPanel"
       >
-        {openPanel && (
-          <Grid container justify="center" className={orderPanelContent}>
-            <Typography variant="h2" data-testid="orderPanelTitle"> Menu Title </Typography>
-            <Typography variant="body2" data-testid="orderPanelDesc">
-              {longDescriptor.description}
-            </Typography>
-          </Grid>
-        )}
+        {openPanel && <OrderPanel />}
       </Box>
     </Grid>
   );

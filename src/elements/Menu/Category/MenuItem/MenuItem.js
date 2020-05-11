@@ -23,7 +23,9 @@ const styles = makeStyles(({ palette, spacing }) => ({
 }));
 
 // Destructure menuItems prop to extract category and menuItems array
-const MenuItem = ({ item: { name, price }, dataTestId, handleClick }) => {
+const MenuItem = ({
+  item: { name, price }, description, dataTestId, handleClick,
+}) => {
   const { root, itemDescription } = styles();
   return (
     <Grid container justify="space-between" data-testid={`item-${dataTestId.replace(/\s/g, '')}`} className={root} onClick={() => handleClick(name)}>
@@ -35,7 +37,7 @@ const MenuItem = ({ item: { name, price }, dataTestId, handleClick }) => {
         </Typography>
         <Typography className={itemDescription}>
           {' '}
-          {shortDescriptor.description}
+          {description}
           {' '}
         </Typography>
       </Grid>
@@ -54,6 +56,11 @@ MenuItem.propTypes = {
   dataTestId: string.isRequired,
   item: object.isRequired,
   handleClick: func.isRequired,
+  description: string,
+};
+
+MenuItem.defaultProps = {
+  description: shortDescriptor.description,
 };
 
 export default MenuItem;
