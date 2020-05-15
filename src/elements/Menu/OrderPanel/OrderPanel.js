@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Grid, Typography, Box, makeStyles,
 } from '@material-ui/core';
+import { string } from 'prop-types';
 import Button from '../../Button';
 import { longDescriptor } from '../../../data';
 import MenuItem from '../Category/MenuItem';
@@ -26,15 +27,15 @@ const styles = makeStyles(({ palette, spacing }) => ({
   },
 }));
 
-const OrderPanel = () => {
+const OrderPanel = ({ itemName, itemPrice }) => {
   const {
     root, orderDescription, orderQtyBtns,
   } = styles();
   return (
     <Grid container className={root}>
       <Typography variant="h1" data-testid="orderPanelTitle"> Select Quantity </Typography>
-      <Box className={orderDescription}>
-        <MenuItem item={{ name: 'test', price: '1.99' }} dataTestId="test" description={longDescriptor.description} />
+      <Box className={orderDescription} data-testid="orderPanelDesc">
+        <MenuItem item={{ name: itemName, price: itemPrice }} dataTestId={`order-${itemName}`} description={longDescriptor.description} />
       </Box>
       <Grid container justify="space-around" className={orderQtyBtns} data-testid="orderPanelQty">
         <Button> - </Button>
@@ -46,6 +47,16 @@ const OrderPanel = () => {
       </Grid>
     </Grid>
   );
+};
+
+OrderPanel.propTypes = {
+  itemName: string,
+  itemPrice: string,
+};
+
+OrderPanel.defaultProps = {
+  itemName: 'Test',
+  itemPrice: '£1.99',
 };
 
 export default OrderPanel;

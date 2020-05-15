@@ -30,7 +30,7 @@ const Category = ({ menuItems: { category, menuItems }, dataTestId, ...props }) 
         <MenuItem
           key={menuItem.id}
           item={menuItem}
-          dataTestId={menuItem.name}
+          dataTestId={`item-${menuItem.name}`}
           {...props}
         />
       ))}

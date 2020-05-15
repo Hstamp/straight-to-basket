@@ -6,10 +6,11 @@ import menuData from '../../../../data/menuData';
 describe('MenuItem', () => {
   const item = menuData[1].menuItems[0];
   const getItemName = (name) => name.replace(/\s/g, '');
+  const testId = `item-${getItemName(item.name)}`;
 
   const props = {
     item,
-    dataTestId: item.name,
+    dataTestId: `item-${item.name}`,
     handleClick: jest.fn(),
   };
 
@@ -21,18 +22,18 @@ describe('MenuItem', () => {
 
   it('renders with base elements', () => {
     const { getByTestId } = renderComponent();
-    expect(getByTestId(`item-${getItemName(item.name)}`));
+    expect(getByTestId(testId));
   });
 
   it('displays the correct item information', () => {
     const { getByTestId } = renderComponent();
-    expect(getByTestId(`item-${getItemName(item.name)}`)).toHaveTextContent(`${item.name}`);
-    expect(getByTestId('itemPrice')).toHaveTextContent(`${item.price}`);
+    expect(getByTestId(testId)).toHaveTextContent(`${item.name}`);
+    expect(getByTestId(`${testId}-itemPrice`)).toHaveTextContent(`${item.price}`);
   });
 
   it('calls the handleClick function when clicked', () => {
     const { getByTestId } = renderComponent();
-    fireEvent.click(getByTestId(`item-${getItemName(item.name)}`));
-    expect(props.handleClick).toHaveBeenCalled();
+    fireEvent.click(getByTestId(testId));
+    expect(props.handleClick).toHaveBeenCalledWith(item.name, item.price);
   });
 });

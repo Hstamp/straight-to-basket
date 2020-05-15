@@ -28,7 +28,7 @@ const MenuItem = ({
 }) => {
   const { root, itemDescription } = styles();
   return (
-    <Grid container justify="space-between" data-testid={`item-${dataTestId.replace(/\s/g, '')}`} className={root} onClick={() => handleClick(name)}>
+    <Grid container justify="space-between" data-testid={dataTestId.replace(/\s/g, '')} className={root} onClick={handleClick && (() => handleClick(name, price))}>
       <Grid item xs={10}>
         <Typography>
           {' '}
@@ -42,7 +42,7 @@ const MenuItem = ({
         </Typography>
       </Grid>
       <Grid item xs={2}>
-        <Typography data-testid="itemPrice">
+        <Typography data-testid={`${dataTestId.replace(/\s/g, '')}-itemPrice`}>
           {' '}
           {price}
           {' '}
@@ -55,12 +55,13 @@ const MenuItem = ({
 MenuItem.propTypes = {
   dataTestId: string.isRequired,
   item: object.isRequired,
-  handleClick: func.isRequired,
+  handleClick: func,
   description: string,
 };
 
 MenuItem.defaultProps = {
   description: shortDescriptor.description,
+  handleClick: () => {},
 };
 
 export default MenuItem;
