@@ -42,16 +42,38 @@ const styles = makeStyles(({ palette, spacing }) => ({
   },
 }));
 
+const initialState = {
+  item: {},
+  basket: [],
+};
+
 /*
   First argument is the current state, the second is the action to update it
   You can use action.type to perform checks inside the reducer
   and action.value to update the state value
 */
-const reducer = (state, action) => ({
-  ...state,
-  ...action.value,
+const reducer = (state, action) => {
+  console.log(state);
+  console.log(action);
+  switch (action.type) {
+    case 'item': {
+      return {
+        ...state,
+        // Overwrite whenever this dispatch is called
+        ...action.value,
+      };
+    }
+    case 'basket': {
+      return {
+        ...state,
+        // Add to the basket array with each selection
+        basket: [...state.basket, action.value],
+      };
+    }
+    default: return state;
+  }
+};
 
-});
 
 const Menu = () => {
   const {
@@ -64,16 +86,22 @@ const Menu = () => {
     The reducer function gives useReducer more flexibility than useState
     to perform different kinds of state update.
   */
-  const [state, dispatch] = useReducer(reducer, { menuItemName: '', menuItemPrice: '' });
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleClick = (menuItemName, menuItemPrice) => {
     setOpenPanel(true);
-    dispatch({ value: { menuItemName, menuItemPrice } });
+    dispatch({ type: 'item', value: { item: { menuItemName, menuItemPrice } } });
   };
 
-  const closeOrderPanel = () => {
+  // TO DO
+  const closeOrderPanel = (menuItemName, menuItemPrice, qty) => {
+    console.log('HERE');
+    if (menuItemName) {
+      dispatch({ type: 'basket', value: { menuItemName, menuItemPrice, qty } });
+    }
     setOpenPanel(false);
   };
+
 
   return (
     <Grid container className={root} data-testid="menu">
@@ -97,10 +125,9 @@ const Menu = () => {
         className={`
           ${orderPanel} ${openPanel ? showOrderPanel : ''}
         `}
-        onClick={closeOrderPanel}
         data-testid="orderPanel"
       >
-        {openPanel && <OrderPanel itemName={state.menuItemName} itemPrice={state.menuItemPrice} />}
+        {openPanel && <OrderPanel itemName={state.item.menuItemName} itemPrice={state.item.menuItemPrice} handleClose={closeOrderPanel} />}
       </Box>
     </Grid>
   );

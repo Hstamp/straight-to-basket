@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import {
-  Grid, Typography, Box, makeStyles,
+  Grid, Typography, IconButton, makeStyles,
 } from '@material-ui/core';
-import { string } from 'prop-types';
+import { string, func } from 'prop-types';
+import CancelIcon from '@material-ui/icons/Cancel';
 import Button from '../../Button';
 import { longDescriptor } from '../../../data';
 import MenuItem from '../Category/MenuItem';
@@ -14,36 +15,60 @@ const styles = makeStyles(({ palette, spacing }) => ({
       paddingBottom: spacing(4),
     },
   },
-  orderDescription: {
-    borderTop: `1px solid ${palette.common.accent}`,
+  orderHeader: {
+    borderBottom: `1px solid ${palette.common.accent}`,
   },
   orderQtyBtns: {
     color: palette.common.grey,
-    margin: `${spacing(3)}px ${spacing(6)}px`,
+    marginTop: spacing(3),
     '& span': {
       borderRadius: 30,
       fontSize: spacing(5),
     },
   },
+  closeButton: {
+    '& svg': {
+      color: palette.secondary.dark,
+    },
+    '&:hover': {
+      backgroundColor: palette.secondary.light,
+    },
+  },
 }));
 
-const OrderPanel = ({ itemName, itemPrice }) => {
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'add': {
+      return state + 1;
+    }
+    case 'subtract': {
+      return state - 1;
+    }
+    default: return state;
+  }
+};
+
+const OrderPanel = ({ itemName, itemPrice, handleClose }) => {
   const {
-    root, orderDescription, orderQtyBtns,
+    root, orderHeader, orderQtyBtns, closeButton,
   } = styles();
+  const [state, dispatch] = useReducer(reducer, 0);
+
   return (
     <Grid container className={root}>
-      <Typography variant="h1" data-testid="orderPanelTitle"> Select Quantity </Typography>
-      <Box className={orderDescription} data-testid="orderPanelDesc">
-        <MenuItem item={{ name: itemName, price: itemPrice }} dataTestId={`order-${itemName}`} description={longDescriptor.description} />
-      </Box>
+      <Grid container justify="space-between" alignItems="flex-end" className={orderHeader}>
+        <Typography variant="h1" data-testid="orderPanelTitle"> Select Quantity </Typography>
+        <IconButton onClick={() => handleClose()} className={closeButton}>
+          <CancelIcon fontSize="large" />
+        </IconButton>
+      </Grid>
+      <MenuItem item={{ name: itemName, price: itemPrice }} dataTestId={`order-${itemName}`} description={longDescriptor.description} />
       <Grid container justify="space-around" className={orderQtyBtns} data-testid="orderPanelQty">
-        <Button> - </Button>
-        <Button disabled>
-          [0]
-          Add Item
+        <Button onClick={() => dispatch({ type: 'subtract' })}> - </Button>
+        <Button disabled={state === 0} onClick={() => handleClose(itemName, itemPrice, state)}>
+          {`[${state}] Add To Order`}
         </Button>
-        <Button> + </Button>
+        <Button onClick={() => dispatch({ type: 'add' })}> + </Button>
       </Grid>
     </Grid>
   );
@@ -52,6 +77,7 @@ const OrderPanel = ({ itemName, itemPrice }) => {
 OrderPanel.propTypes = {
   itemName: string,
   itemPrice: string,
+  handleClose: func.isRequired,
 };
 
 OrderPanel.defaultProps = {
