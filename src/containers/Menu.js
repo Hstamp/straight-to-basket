@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import {
   makeStyles, Grid, Box, Typography,
 } from '@material-ui/core';
@@ -7,6 +7,7 @@ import { menuData } from '../data';
 import {
   Button, Category, OrderPanel, Layout,
 } from '../elements';
+import TotalBasketContext from '../TotalBasketContext';
 
 const styles = makeStyles(({ palette, spacing }) => ({
   root: {
@@ -56,56 +57,16 @@ const styles = makeStyles(({ palette, spacing }) => ({
   },
 }));
 
-const initialState = {
-  item: {},
-  basket: [],
-};
-
-/*
-  First argument is the current state, the second is the action to update it
-  You can use action.type to perform checks inside the reducer
-  and action.value to update the state value
-*/
-const reducer = (state, action) => {
-  console.log('STATE', state);
-  switch (action.type) {
-    case 'item': {
-      return {
-        ...state,
-        // Overwrite item to be ordered with each dispatch call
-        ...action.value,
-      };
-    }
-    case 'basket': {
-      return {
-        ...state,
-        // Add to the basket array with each selection
-        basket: [
-          ...state.basket,
-          {
-            ...action.value,
-            // Don't focus on accurate totalQty for this exercise
-            totalQty: Number.parseFloat(action.value.menuItemPrice) * action.value.qty,
-          },
-        ],
-      };
-    }
-    default: return state;
-  }
-};
-
 const Menu = () => {
   const {
     root, menuImage, menuAllItems, orderPanel, showOrderPanel, reviewOrderButton,
   } = styles();
 
   const [openPanel, setOpenPanel] = useState(false);
-  /*
-  *  state is set by the dispatch function.
-  *  The reducer function gives useReducer more flexibility than useState
-  *  to perform different kinds of state update.
-  */
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { dispatch } = React.useContext(TotalBasketContext);
+  const { state } = React.useContext(TotalBasketContext);
+
+  console.log('state', state);
 
   const handleClick = (menuItemName, menuItemPrice) => {
     setOpenPanel(true);
@@ -150,7 +111,7 @@ const Menu = () => {
               <Button
                 component={Link}
                 to="/review-order"
-                disabled={state.basket.length === 0}
+                // disabled={state.basket.length === 0}
               >
                 Review your order
               </Button>
