@@ -4,8 +4,8 @@ import {
 } from '@material-ui/core';
 import { string, func } from 'prop-types';
 import CancelIcon from '@material-ui/icons/Cancel';
-import Button from '../../Button';
-import { longDescriptor } from '../../../data';
+import Button from '../Button';
+import { longDescriptor } from '../../data';
 import MenuItem from '../Category/MenuItem';
 
 const styles = makeStyles(({ palette, spacing }) => ({
@@ -58,17 +58,21 @@ const OrderPanel = ({ itemName, itemPrice, handleClose }) => {
     <Grid container className={root}>
       <Grid container justify="space-between" alignItems="flex-end" className={orderHeader}>
         <Typography variant="h1" data-testid="orderPanelTitle"> Select Quantity </Typography>
-        <IconButton onClick={() => handleClose()} className={closeButton}>
+        <IconButton onClick={() => handleClose()} className={closeButton} data-testid="closeButton">
           <CancelIcon fontSize="large" />
         </IconButton>
       </Grid>
       <MenuItem item={{ name: itemName, price: itemPrice }} dataTestId={`order-${itemName}`} description={longDescriptor.description} />
       <Grid container justify="space-around" className={orderQtyBtns} data-testid="orderPanelQty">
-        <Button onClick={() => dispatch({ type: 'subtract' })}> - </Button>
-        <Button disabled={state === 0} onClick={() => handleClose(itemName, itemPrice, state)}>
+        <Button onClick={() => dispatch({ type: 'subtract' })} data-testid="qtyMinusButton"> - </Button>
+        <Button
+          disabled={state === 0}
+          onClick={() => handleClose(itemName, itemPrice, state)}
+          data-testid="addToOrderButton"
+        >
           {`[${state}] Add To Order`}
         </Button>
-        <Button onClick={() => dispatch({ type: 'add' })}> + </Button>
+        <Button onClick={() => dispatch({ type: 'add' })} data-testid="qtyPlusButton"> + </Button>
       </Grid>
     </Grid>
   );

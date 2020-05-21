@@ -3,7 +3,7 @@ import {
   makeStyles, Grid, Typography,
 } from '@material-ui/core';
 import { string, object, func } from 'prop-types';
-import { shortDescriptor } from '../../../../data';
+import { shortDescriptor } from '../../../data';
 
 
 const styles = makeStyles(({ palette, spacing }) => ({

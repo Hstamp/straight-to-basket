@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { Menu, NotFound } from './containers';
+import { Menu, ReviewOrder, NotFound } from './containers';
 
 const App = () => (
   <Router>
@@ -15,6 +15,9 @@ const App = () => (
       </Route>
       <Route path="/menu">
         <Menu />
+      </Route>
+      <Route path="/review-order">
+        <ReviewOrder />
       </Route>
       {/* * always matches so can be used for 404 pages */}
       <Route path="*">

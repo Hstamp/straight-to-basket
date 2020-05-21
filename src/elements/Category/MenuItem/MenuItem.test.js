@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import MenuItem from './MenuItem';
-import menuData from '../../../../data/menuData';
+import menuData from '../../../data/menuData';
 
 describe('MenuItem', () => {
   const item = menuData[1].menuItems[0];

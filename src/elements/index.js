@@ -1,7 +1,11 @@
 import Layout from './Layout';
-import Menu from './Menu';
+import Button from './Button';
+import OrderPanel from './OrderPanel';
+import Category from './Category';
 
 export {
   Layout,
-  Menu,
+  Button,
+  OrderPanel,
+  Category,
 };
